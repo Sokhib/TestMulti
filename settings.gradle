@@ -10,3 +10,4 @@ rootProject.name = "TestMulti"
 include ':app'
 include ':data'
 include ':features'
+include ':domain'
