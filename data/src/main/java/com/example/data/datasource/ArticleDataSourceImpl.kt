@@ -15,8 +15,7 @@ import javax.inject.Singleton
 class ArticleDataSourceImpl @Inject constructor(
     private val nytService: NYTService,
     private val articlesMapper: ArticleListMapper
-) :
-    ArticleDataSource {
+) : ArticleDataSource {
     override fun getMostPopularArticles(days: Day): Flow<Result<List<ArticleModel>>> = resultFlow {
         val articleResponse = nytService.fetchMostPopularArticles(days = days.days)
         return@resultFlow articlesMapper.map(articleResponse)

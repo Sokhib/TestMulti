@@ -1,33 +1,28 @@
 package com.example.testmulti
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.testmulti.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        viewModel.getArticles()
 
-        // Example of a call to a native method
-        binding.sampleText.text = stringFromJNI()
+        viewModel.liveData.observe(this, {
+            binding.sampleTextView.text = it
+        })
+
     }
 
-    /**
-     * A native method that is implemented by the 'testmulti' native library,
-     * which is packaged with this application.
-     */
-    external fun stringFromJNI(): String
-
-    companion object {
-        // Used to load the 'testmulti' library on application startup.
-        init {
-            System.loadLibrary("testmulti")
-        }
-    }
 }

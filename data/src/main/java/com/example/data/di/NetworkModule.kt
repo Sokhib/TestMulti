@@ -16,30 +16,13 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
-    init {
-        System.loadLibrary("native-lib")
-    }
-
-    external fun apiKeyFromJNI(): String
-    external fun baseURLFromJNI(): String
-
-
-    @Provides
-    @ApiKey
-    fun provideAPIKey() = apiKeyFromJNI()
-
-    @Provides
-    @BaseUrl
-    fun provideBaseUrl() = baseURLFromJNI()
-
 
     @Provides
     fun providesLoggingInterceptor(): HttpLoggingInterceptor {
@@ -60,10 +43,11 @@ object NetworkModule {
 
     @Provides
     @KeyInterceptor
-    fun provideKeyInterceptor(@ApiKey apiKey: String): Interceptor {
+    fun provideKeyInterceptor(): Interceptor {
         return Interceptor { chain: Interceptor.Chain ->
             var original: Request = chain.request()
-            val url = original.url.newBuilder().addQueryParameter(API_KEY, apiKey).build()
+            val url = original.url.newBuilder()
+                .addQueryParameter(API_KEY, "rc5Jljnq92X5JKGCWVGg3ebvlGFH5QZe").build()
             original = original.newBuilder().url(url).build()
             chain.proceed(original)
         }
@@ -91,23 +75,17 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        @BaseUrl BASE_URL: String
+        okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
-            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://api.nytimes.com/")
             .client(okHttpClient)
             .build()
 
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): NYTService = retrofit.create(NYTService::class.java)
-
-//    @Provides
-//    @Singleton
-//    fun provideApiHelper(nytNetworkDataSourceImpl: NYTNetworkDataSourceImpl): NYTNetworkDataSource =
-//        nytNetworkDataSourceImpl
 
     @Provides
     @Singleton
@@ -117,14 +95,6 @@ object NetworkModule {
 }
 
 const val API_KEY = "api-key"
-
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class ApiKey
-
-@Retention(AnnotationRetention.BINARY)
-@Qualifier
-annotation class BaseUrl
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
