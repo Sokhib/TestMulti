@@ -2,8 +2,9 @@ package com.example.data.mapper
 
 import com.example.data.model.PopularArticles
 import com.example.domain.model.ArticleModel
+import javax.inject.Inject
 
-class ArticleListMapper : Mapper<PopularArticles, List<ArticleModel>> {
+class ArticleListMapper @Inject constructor() : Mapper<PopularArticles, List<ArticleModel>> {
     override suspend fun map(from: PopularArticles): List<ArticleModel> =
         from.results.takeIf { it.isNotEmpty() }?.map { article ->
             ArticleModel(
