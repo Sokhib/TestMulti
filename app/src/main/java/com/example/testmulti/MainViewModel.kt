@@ -1,9 +1,11 @@
 package com.example.testmulti
 
+import androidx.annotation.VisibleForTesting
+import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.base.BaseViewModel
 import com.example.domain.extension.onError
 import com.example.domain.extension.onLoading
 import com.example.domain.extension.onSuccess
@@ -16,8 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val articleUseCase: ArticleUseCase
-) : ViewModel() {
+    @VisibleForTesting(otherwise = PRIVATE)
+    val articleUseCase: ArticleUseCase
+) : BaseViewModel() {
 
     private val _mutable = MutableLiveData<String>()
     val liveData: LiveData<String>
