@@ -6,7 +6,9 @@ import androidx.fragment.app.viewModels
 import com.example.common.base.BaseFragment
 import com.example.testmulti.R
 import com.example.testmulti.databinding.ArticleListFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ArticleListFragment :
     BaseFragment<ArticleListViewModel, ArticleListFragmentBinding>(R.layout.article_list_fragment) {
 
@@ -14,10 +16,7 @@ class ArticleListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.sampleText.setOnClickListener {
-            articleVM.showMessage("Hey There")
-        }
-
+        binding!!.viewmodel = articleVM
     }
 
 

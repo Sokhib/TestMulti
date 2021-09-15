@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TestMulti</string>
+    <string name="empty_article_list">Empty article list</string>
 </resources>

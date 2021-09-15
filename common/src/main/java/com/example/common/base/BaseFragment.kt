@@ -10,10 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.common.extension.observe
-import com.example.common.helper.Event
+import com.example.common.extension.observeSingle
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 
 abstract class BaseFragment<BVM : BaseViewModel, DB : ViewDataBinding>(
@@ -32,24 +30,14 @@ abstract class BaseFragment<BVM : BaseViewModel, DB : ViewDataBinding>(
         super.onCreateView(inflater, container, savedInstanceState)
         val viewModel = getViewModel()
 
-        viewModel.progressState.observe(viewLifecycleOwner, {
-            if (it != 0) {
-                Timber.d("Show Progress")
-            } else {
-                Timber.d("Hide Progress")
-            }
-
-        })
         lifecycleScope.launch {
-            observe(viewModel.messageText, ::showMessage)
+            observeSingle(viewModel.messageText, ::showMessage)
         }
         return binding!!.root
     }
 
-    private fun showMessage(content: Event<String>) {
-        content.getContentIfNotHandled()?.let { message ->
-            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
-        }
+    private fun showMessage(message: String) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
     }
 
 
