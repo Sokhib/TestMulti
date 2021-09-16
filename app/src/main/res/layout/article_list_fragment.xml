@@ -21,18 +21,10 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         <!--       TODO: Extract to different XML-->
-        <ProgressBar
-            visible="@{viewmodel.articleListState.loading}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
 
-        <TextView
-            visible="@{viewmodel.articleListState.empty}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/empty_article_list" />
+        <include
+            layout="@layout/layout_loading"
+            visible="@{viewmodel.articleListState.loading}" />
 
 
     </FrameLayout>
