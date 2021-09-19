@@ -34,5 +34,11 @@
             app:circleRadius="20dp"
             app:circleState="false" />
 
+
+        <com.example.commons.customview.SliderView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="10dp" />
+
     </FrameLayout>
 </layout>
