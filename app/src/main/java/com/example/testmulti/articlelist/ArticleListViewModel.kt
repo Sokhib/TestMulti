@@ -23,6 +23,10 @@ class ArticleListViewModel @Inject constructor(
     val articleListState: LiveData<ArticleListViewState>
         get() = _articleListState
 
+    private val _state = MutableLiveData<Boolean>()
+    val state: LiveData<Boolean>
+        get() = _state
+
     init {
         useCase(Day(1))
             .onLoading {
@@ -33,6 +37,7 @@ class ArticleListViewModel @Inject constructor(
                     _articleListState.postValue(ArticleListViewState.Empty)
                 } else {
                     Timber.d(articles[0].title)
+                    _state.value = true
                     _articleListState.postValue(ArticleListViewState.Loaded)
                 }
             }

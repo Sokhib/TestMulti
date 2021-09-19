@@ -20,12 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        <!--       TODO: Extract to different XML-->
 
         <include
             layout="@layout/layout_loading"
             visible="@{viewmodel.articleListState.loading}" />
 
+        <com.example.commons.customview.CircleView
+            android:id="@+id/circleView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            app:circleColor="@android:color/black"
+            app:circleRadius="20dp"
+            app:circleState="false" />
 
     </FrameLayout>
 </layout>
