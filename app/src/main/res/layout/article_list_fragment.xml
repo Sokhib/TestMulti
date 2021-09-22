@@ -29,16 +29,26 @@
             android:id="@+id/circleView"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center|bottom"
             app:circleColor="@android:color/black"
             app:circleRadius="20dp"
             app:circleState="false" />
 
 
         <com.example.commons.customview.SliderView
+            android:id="@+id/sliderView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/testText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="22sp"
+            tools:text="dsa" />
 
     </FrameLayout>
 </layout>
