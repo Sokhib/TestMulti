@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 
 //TODO: Handle livedata support
 //TODO: Handle click listener
@@ -21,19 +22,16 @@ class CircleView @JvmOverloads constructor(
 
     init {
         this.setBackgroundColor(Color.TRANSPARENT)
-        attrs?.let { attributeSet ->
-            val typedArrayAttrs = context.obtainStyledAttributes(
-                attributeSet,
-                R.styleable.CircleView
-            )
-            radius = typedArrayAttrs.getDimension(
+        context.withStyledAttributes(attrs, R.styleable.CircleView, defStyleAttr) {
+            radius = getDimension(
                 R.styleable.CircleView_circleRadius,
                 dpToPx(30f, context).toFloat()
             )
-            color = typedArrayAttrs.getColor(R.styleable.CircleView_circleColor, color)
-            state = typedArrayAttrs.getBoolean(R.styleable.CircleView_circleState, false)
+            color = getColor(R.styleable.CircleView_circleColor, color)
+            state = getBoolean(R.styleable.CircleView_circleState, false)
             if (state) setChecked() else setUnchecked()
-            typedArrayAttrs.recycle()
+            recycle()
+
         }
         paint.color = color
 //        paint.apply {
