@@ -27,7 +27,7 @@ class ArticleListFragment :
 
     private fun onArticleClick() {
         articlesAdapter.onArticleClick = {
-            //TODO: Article Clicked...
+            articleVM.showMessage(it.title)
         }
     }
 
