@@ -1,5 +1,6 @@
 package com.example.testmulti.articlelist
 
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -7,11 +8,11 @@ import com.example.common.base.BaseViewModel
 import com.example.domain.extension.onError
 import com.example.domain.extension.onLoading
 import com.example.domain.extension.onSuccess
+import com.example.domain.model.ArticleModel
 import com.example.domain.model.Day
 import com.example.domain.usecase.ArticleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,9 +24,11 @@ class ArticleListViewModel @Inject constructor(
     val articleListState: LiveData<ArticleListViewState>
         get() = _articleListState
 
-    private val _state = MutableLiveData<Boolean>()
-    val state: LiveData<Boolean>
-        get() = _state
+    private val _articleListData = MutableLiveData<List<ArticleModel>>()
+    val articleListData
+        get() = _articleListData
+
+    var articleError = ObservableField<String>()
 
     init {
         useCase(Day(1))
@@ -35,14 +38,16 @@ class ArticleListViewModel @Inject constructor(
             .onSuccess { articles ->
                 if (articles.isEmpty()) {
                     _articleListState.postValue(ArticleListViewState.Empty)
+                    _articleListData.postValue(emptyList())
                 } else {
-                    Timber.d(articles[0].title)
-                    _state.value = true
+                    _articleListData.postValue(articles)
                     _articleListState.postValue(ArticleListViewState.Loaded)
                 }
             }
             .onError {
+                //TODO: Also showMessage() toast can be used
                 _articleListState.postValue(ArticleListViewState.Error)
+                articleError.set(it.message)
             }
             .launchIn(viewModelScope)
     }

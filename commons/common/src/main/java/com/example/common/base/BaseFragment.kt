@@ -43,8 +43,6 @@ abstract class BaseFragment<BVM : BaseViewModel, DB : ViewDataBinding>(
 
     override fun onDestroyView() {
         super.onDestroyView()
-//        progressBar!!.dismiss()
-//        progressBar = null
         binding = null
     }
 

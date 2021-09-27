@@ -25,20 +25,10 @@
             layout="@layout/layout_loading"
             visible="@{viewmodel.articleListState.loading}" />
 
-        <com.example.commons.customview.CircleView
-            android:id="@+id/circleView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            app:circleColor="@android:color/black"
-            app:circleRadius="20dp"
-            app:circleState="false" />
-
-
-        <com.example.commons.customview.SliderView
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:padding="10dp" />
+        <include
+            layout="@layout/layout_error"
+            visible="@{viewmodel.articleListState.error}"
+            app:errorMessage="@{viewmodel.articleError}" />
 
     </FrameLayout>
 </layout>

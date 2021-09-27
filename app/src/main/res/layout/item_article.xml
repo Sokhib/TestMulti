@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="article"
+            type="com.example.domain.model.ArticleModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/article_card"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="4dp"
+        android:background="@color/cardview_dark_background"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/article_photo_imageview"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:url="@{article.mediaUrl}"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/title_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{article.title}"
+                android:textAppearance="@style/HeaderText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/article_photo_imageview"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="mostPopularListFragmentmostPopularListFragmentmostPopularListFragment" />
+
+            <TextView
+                android:id="@+id/author_textview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="2dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{article.byline}"
+                android:textAppearance="@style/SubText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline"
+                app:layout_constraintStart_toEndOf="@id/article_photo_imageview"
+                app:layout_constraintTop_toBottomOf="@id/title_textview"
+                tools:text="This is created by" />
+
+            <TextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{article.publishedDate}"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/SubText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/title_textview"
+                tools:text="25.01.1994" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.7" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

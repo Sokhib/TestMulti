@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.common.base.BaseFragment
 import com.example.common.extension.observe
+import com.example.domain.model.ArticleModel
 import com.example.testmulti.R
 import com.example.testmulti.databinding.ArticleListFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,17 +15,36 @@ class ArticleListFragment :
     BaseFragment<ArticleListViewModel, ArticleListFragmentBinding>(R.layout.article_list_fragment) {
 
     private val articleVM: ArticleListViewModel by viewModels()
+    private val articlesAdapter by lazy { ArticleAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding!!.viewmodel = articleVM
-        observe(articleVM.state, ::setCircleState)
+        setUpRecycler()
+        observe(articleVM.articleListData, ::observeArticles)
+        onArticleClick()
     }
 
+    private fun onArticleClick() {
+        articlesAdapter.onArticleClick = {
+            //TODO: Article Clicked...
+        }
+    }
+
+    private fun observeArticles(articleList: List<ArticleModel>?) {
+        articleList?.let {
+            articlesAdapter.setArticleList(articleList)
+            binding!!.executePendingBindings()
+        }
+    }
+
+    private fun setUpRecycler() {
+        binding!!.articlesRecycler.apply {
+            adapter = articlesAdapter
+            setHasFixedSize(true)
+        }
+    }
 
     override fun getViewModel() = articleVM
-    private fun setCircleState(state: Boolean) {
-        if (state) binding!!.circleView.setChecked()
-    }
 }
 
