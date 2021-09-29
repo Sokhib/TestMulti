@@ -1,6 +1,7 @@
 package com.example.testmulti
 
-import org.junit.Assert.assertEquals
+import com.example.testmulti.articlelist.ArticleListViewState
+import org.junit.Assert
 import org.junit.Test
 
 /**
@@ -9,8 +10,26 @@ import org.junit.Test
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 class ExampleUnitTest {
+
+    lateinit var state: ArticleListViewState
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun setStateAsEmpty_ShouldBeSettled() {
+        state = ArticleListViewState.Empty
+
+        Assert.assertTrue(state.isEmpty())
+        Assert.assertFalse(state.isLoaded())
+        Assert.assertFalse(state.isLoading())
+        Assert.assertFalse(state.isError())
+    }
+
+    @Test
+    fun setStateAsLoaded_ShouldBeSettled() {
+        state = ArticleListViewState.Loaded
+
+        Assert.assertTrue(state.isLoaded())
+        Assert.assertFalse(state.isEmpty())
+        Assert.assertFalse(state.isLoading())
+        Assert.assertFalse(state.isError())
     }
 }

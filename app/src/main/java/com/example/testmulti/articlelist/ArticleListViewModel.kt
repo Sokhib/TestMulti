@@ -1,5 +1,6 @@
 package com.example.testmulti.articlelist
 
+import androidx.annotation.VisibleForTesting
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArticleListViewModel @Inject constructor(
-    useCase: ArticleUseCase
+    @VisibleForTesting useCase: ArticleUseCase
 ) : BaseViewModel() {
 
     private val _articleListState = MutableLiveData<ArticleListViewState>()

@@ -17,7 +17,9 @@ import kotlinx.coroutines.launch
 abstract class BaseFragment<BVM : BaseViewModel, DB : ViewDataBinding>(
     @LayoutRes val layout: Int
 ) : Fragment() {
-    var binding: DB? = null
+    private var _binding: DB? = null
+    protected val binding
+        get() = _binding!!
 
     abstract fun getViewModel(): BVM
     override fun onCreateView(
@@ -25,15 +27,15 @@ abstract class BaseFragment<BVM : BaseViewModel, DB : ViewDataBinding>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(layoutInflater, layout, container, false)
-        binding!!.lifecycleOwner = viewLifecycleOwner
+        _binding = DataBindingUtil.inflate(layoutInflater, layout, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         super.onCreateView(inflater, container, savedInstanceState)
         val viewModel = getViewModel()
 
         lifecycleScope.launch {
             observeSingle(viewModel.messageText, ::showMessage)
         }
-        return binding!!.root
+        return binding.root
     }
 
     private fun showMessage(message: String) {
@@ -43,7 +45,7 @@ abstract class BaseFragment<BVM : BaseViewModel, DB : ViewDataBinding>(
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 
 }

@@ -19,7 +19,7 @@ class ArticleListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.viewmodel = articleVM
+        binding.viewmodel = articleVM
         setUpRecycler()
         observe(articleVM.articleListData, ::observeArticles)
         onArticleClick()
@@ -34,12 +34,12 @@ class ArticleListFragment :
     private fun observeArticles(articleList: List<ArticleModel>?) {
         articleList?.let {
             articlesAdapter.setArticleList(articleList)
-            binding!!.executePendingBindings()
+            binding.executePendingBindings()
         }
     }
 
     private fun setUpRecycler() {
-        binding!!.articlesRecycler.apply {
+        binding.articlesRecycler.apply {
             adapter = articlesAdapter
             setHasFixedSize(true)
         }
