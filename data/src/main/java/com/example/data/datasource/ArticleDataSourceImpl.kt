@@ -15,7 +15,7 @@ class ArticleDataSourceImpl @Inject constructor(
     @VisibleForTesting val articlesMapper: ArticleListMapper
 ) : ArticleDataSource {
     override fun getMostPopularArticles(days: Day) = resultFlow {
-        val articleResponse = nytService.fetchMostPopularArticles(days = days.days)
+        val articleResponse = nytService.fetchMostPopularArticles(days = days)
         return@resultFlow articlesMapper.map(articleResponse)
     }
 }
