@@ -3,7 +3,9 @@
     package="com.example.testmulti">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -13,6 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TestMulti">
         <activity
+            android:name=".TestIntentActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,11 +34,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-            <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
-            </intent-filter>
         </activity>
     </application>
 
