@@ -48,8 +48,16 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     //navigation
-    def navigation = '2.4.0-alpha09'
+    def navigation = '2.4.0-alpha10'
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+
+    def mock_server_version = "4.3.1"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mock_server_version"
+    def coroutines_test_version = "1.2.1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_test_version"
+    def android_core_testing = "2.1.0"
+    testImplementation "androidx.arch.core:core-testing:$android_core_testing"
+    testImplementation "io.mockk:mockk:1.12.0"
 
 }

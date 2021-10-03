@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ArticleListViewModel @Inject constructor(
-    @VisibleForTesting useCase: ArticleUseCase
+    @VisibleForTesting val useCase: ArticleUseCase
 ) : BaseViewModel() {
 
     private val _articleListState = MutableLiveData<ArticleListViewState>()
@@ -32,6 +32,10 @@ class ArticleListViewModel @Inject constructor(
     var articleError = ObservableField<String>()
 
     init {
+        fetchArticles()
+    }
+
+    private fun fetchArticles() {
         useCase(Day(1))
             .onLoading {
                 _articleListState.postValue(ArticleListViewState.Loading)

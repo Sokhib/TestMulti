@@ -1,0 +1,108 @@
+{
+  "status": "OK",
+  "copyright": "Copyright (c) 2021 The New York Times Company.  All Rights Reserved.",
+  "num_results": 20,
+  "results": [
+    {
+      "uri": "nyt://article/c0b61f00-cf65-5536-98d3-79fb9db7949f",
+      "url": "https://www.nytimes.com/2021/06/26/us/miami-building-collapse-investigation.html",
+      "id": 100000007836634,
+      "asset_id": 100000007836634,
+      "source": "New York Times",
+      "published_date": "2021-06-26",
+      "updated": "2021-07-02 19:32:05",
+      "section": "U.S.",
+      "subsection": "",
+      "nytdsection": "u.s.",
+      "adx_keywords": "Surfside, Fla, Building Collapse (2021);Buildings (Structures);Building (Construction);Engineering and Engineers;Accidents and Safety;Concrete;Condominiums;Morabito, Frank P;Morabito Consultants;Surfside (Fla)",
+      "column": null,
+      "byline": "By Mike Baker, Anjali Singhvi and Patricia Mazzei",
+      "type": "Article",
+      "title": "Engineer Warned of ‘Major Structural Damage’ at Florida Condo Complex",
+      "abstract": "A consultant in 2018 urged the managers to repair cracked columns and crumbling concrete. The work was finally about to get underway when the building collapsed.",
+      "des_facet": [
+        "Surfside, Fla, Building Collapse (2021)",
+        "Buildings (Structures)",
+        "Building (Construction)",
+        "Engineering and Engineers",
+        "Accidents and Safety",
+        "Concrete",
+        "Condominiums"
+      ],
+      "org_facet": [
+        "Morabito Consultants"
+      ],
+      "per_facet": [
+        "Morabito, Frank P"
+      ],
+      "geo_facet": [
+        "Surfside (Fla)"
+      ],
+      "media": [
+        {
+          "type": "image",
+          "subtype": "photo",
+          "caption": "A structural engineer detailed a range of problems at the Champlain Towers South complex, including poor waterproofing at the base of the building.",
+          "copyright": "Gerald Herbert/Associated Press",
+          "approved_for_syndication": 1,
+          "media-metadata": [
+            {
+              "url": "https://static01.nyt.com/images/2021/07/25/multimedia/25-miami-mystery-8/merlin_189906189_2afc50d2-000e-4386-8c39-d8dcb661f9ff-thumbStandard.jpg",
+              "format": "Standard Thumbnail",
+              "height": 75,
+              "width": 75
+            },
+            {
+              "url": "https://static01.nyt.com/images/2021/07/25/multimedia/25-miami-mystery-8/merlin_189906189_2afc50d2-000e-4386-8c39-d8dcb661f9ff-mediumThreeByTwo210.jpg",
+              "format": "mediumThreeByTwo210",
+              "height": 140,
+              "width": 210
+            },
+            {
+              "url": "https://static01.nyt.com/images/2021/07/25/multimedia/25-miami-mystery-8/merlin_189906189_2afc50d2-000e-4386-8c39-d8dcb661f9ff-mediumThreeByTwo440.jpg",
+              "format": "mediumThreeByTwo440",
+              "height": 293,
+              "width": 440
+            }
+          ]
+        }
+      ],
+      "eta_id": 0
+    },
+    {
+      "uri": "nyt://article/b7e23ef9-9053-5eb9-9d1d-5d0d2e5f5024",
+      "url": "https://www.nytimes.com/2021/06/27/us/miami-building-investigation-clues.html",
+      "id": 100000007836895,
+      "asset_id": 100000007836895,
+      "source": "New York Times",
+      "published_date": "2021-06-27",
+      "updated": "2021-07-02 19:31:44",
+      "section": "U.S.",
+      "subsection": "",
+      "nytdsection": "u.s.",
+      "adx_keywords": "Surfside, Fla, Building Collapse (2021);Buildings (Structures);Engineering and Engineers;Building (Construction);Concrete;National Institute of Standards and Technology;Florida;Surfside (Fla)",
+      "column": null,
+      "byline": "By James Glanz, Anjali Singhvi and Mike Baker",
+      "type": "Article",
+      "title": "Possible Failure Point Emerges in Miami-Area Building Collapse",
+      "abstract": "Some engineers looking at the failure of a 13-story condo tower in Florida said the collapse appeared to have begun somewhere near the bottom of the building.",
+      "des_facet": [
+        "Surfside, Fla, Building Collapse (2021)",
+        "Buildings (Structures)",
+        "Engineering and Engineers",
+        "Building (Construction)",
+        "Concrete"
+      ],
+      "org_facet": [
+        "National Institute of Standards and Technology"
+      ],
+      "per_facet": [],
+      "geo_facet": [
+        "Florida",
+        "Surfside (Fla)"
+      ],
+      "media": [],
+      "eta_id": 0
+    }
+  ]
+}
