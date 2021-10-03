@@ -10,20 +10,22 @@
             type="com.example.testmulti.articlelist.ArticleListViewModel" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".articlelist.ArticleListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/articles_recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <include
             layout="@layout/layout_loading"
-            visible="@{viewmodel.articleListState.loading}" />
+            visible="@{viewmodel.articleListState.loading}"
+            android:visibility="gone" />
 
         <com.example.commons.customview.CircleView
             android:id="@+id/circleView"
@@ -37,8 +39,9 @@
 
         <com.example.commons.customview.SliderView
             android:id="@+id/sliderView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="70dp"
+            android:layout_gravity="center"
             android:padding="10dp" />
 
         <TextView
@@ -46,9 +49,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
+            android:text="@{viewmodel.editTextText}"
             android:textColor="@android:color/holo_green_light"
             android:textSize="22sp"
             tools:text="dsa" />
 
-    </FrameLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={viewmodel.editTextText}" />
+
+    </LinearLayout>
 </layout>

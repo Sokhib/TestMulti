@@ -21,7 +21,8 @@ class SliderView @JvmOverloads constructor(
         }
 
         circlePaint.apply {
-            color = Color.GREEN
+            flags = Paint.ANTI_ALIAS_FLAG
+            color = Color.WHITE
         }
     }
 

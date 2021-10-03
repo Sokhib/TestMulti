@@ -10,7 +10,11 @@ import com.example.domain.extension.onSuccess
 import com.example.domain.model.Day
 import com.example.domain.usecase.ArticleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -26,6 +30,11 @@ class ArticleListViewModel @Inject constructor(
     private val _state = MutableLiveData<Boolean>()
     val state: LiveData<Boolean>
         get() = _state
+
+
+    val editTextText = MutableStateFlow<String?>(null)
+    private val _names = MutableStateFlow<String?>(null)
+    val names: StateFlow<String?> = _names
 
     init {
         useCase(Day(1))
@@ -45,6 +54,14 @@ class ArticleListViewModel @Inject constructor(
                 _articleListState.postValue(ArticleListViewState.Error)
             }
             .launchIn(viewModelScope)
+
+        viewModelScope.launch {
+            editTextText.collect {
+                it?.let {
+                    if (it.isEmpty()) showMessage("Empty")
+                }
+            }
+        }
     }
 
 }
