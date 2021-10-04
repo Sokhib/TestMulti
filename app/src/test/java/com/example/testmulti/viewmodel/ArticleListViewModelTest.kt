@@ -92,28 +92,26 @@ class ArticleListViewModelTest {
     }
 
     @Test
-    fun `throw io exception while fetching data and check data state is null`() = runBlocking {
-        every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(IOException("IO Exception")))
+    fun `throw exception while fetching data and check data state is null`() = runBlocking {
+        every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(Exception("Exception")))
         articleViewModel.fetchArticles()
         val actualData = articleViewModel.articleListData.value
         val expectedData = null
 
         assertEquals(actualData, expectedData)
-        assertEquals(articleViewModel.articleListState.value, ArticleListViewState.Error)
-        assert(articleViewModel.articleError.get().isNullOrEmpty().not())
     }
 
     @Test
-    fun `throw io exception while fetching data and check view state is error state`() =
+    fun `throw exception while fetching data and check view state is error state`() =
         runBlocking {
-            every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(IOException("IO Exception")))
+            every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(Exception("Exception")))
             articleViewModel.fetchArticles()
 
             assertEquals(articleViewModel.articleListState.value, ArticleListViewState.Error)
         }
 
     @Test
-    fun `throw io exception while fetching data and check error string is not null`() =
+    fun `throw exception while fetching data and check error string is not null`() =
         runBlocking {
             every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(IOException("IO Exception")))
             articleViewModel.fetchArticles()
@@ -141,8 +139,6 @@ class ArticleListViewModelTest {
 
         articleViewModel.fetchArticles()
         assert(list.first().isLoading())
-//        assertEquals(ArticleListViewState.Loading, articleViewModel.articleListState.value)
-
     }
 
     @Test
