@@ -35,7 +35,7 @@ class ArticleListViewModel @Inject constructor(
         fetchArticles()
     }
 
-    private fun fetchArticles() {
+    fun fetchArticles() {
         useCase(Day(1))
             .onLoading {
                 _articleListState.postValue(ArticleListViewState.Loading)
