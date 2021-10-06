@@ -3,7 +3,7 @@ buildscript {
 
     ext {
         dagger_hilt_verison = '2.37'
-        kotlin_version = '1.5.20'
+        kotlin_version = '1.5.31'
     }
     repositories {
         google()
