@@ -20,6 +20,11 @@ class ArticleViewHolder(
     }
 
     fun bind(data: ArticleModel) {
+        //TODO: Change margin of the first item only
+//        (binding.root.layoutParams as ViewGroup.MarginLayoutParams).apply {
+//            if(layoutPosition == 0)
+//                topMargin = 4
+//        }
         binding.article = data
         binding.executePendingBindings()
     }

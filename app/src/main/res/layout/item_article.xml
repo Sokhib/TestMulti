@@ -14,7 +14,7 @@
         android:id="@+id/article_card"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_margin="4dp"
+        android:layout_margin="16dp"
         android:background="@color/cardview_dark_background"
         android:clipChildren="false"
         android:clipToPadding="false"
