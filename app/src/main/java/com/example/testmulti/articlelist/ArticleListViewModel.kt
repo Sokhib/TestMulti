@@ -10,14 +10,13 @@ import com.example.domain.extension.onSuccess
 import com.example.domain.model.Day
 import com.example.domain.usecase.ArticleUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@FlowPreview
 @HiltViewModel
 class ArticleListViewModel @Inject constructor(
     useCase: ArticleUseCase
@@ -56,11 +55,12 @@ class ArticleListViewModel @Inject constructor(
             .launchIn(viewModelScope)
 
         viewModelScope.launch {
-            editTextText.collect {
-                it?.let {
-                    if (it.isEmpty()) showMessage("Empty")
+            editTextText.debounce(2000)
+                .collect {
+                    it?.let {
+                        if (it.isEmpty()) showMessage("Empty")
+                    }
                 }
-            }
         }
     }
 
