@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.common.base.BaseViewModel
+import com.example.common.enum.Period
 import com.example.domain.extension.onError
 import com.example.domain.extension.onLoading
 import com.example.domain.extension.onSuccess
@@ -35,8 +36,9 @@ class ArticleListViewModel @Inject constructor(
         fetchArticles()
     }
 
+    @VisibleForTesting
     fun fetchArticles() {
-        useCase(Day(1))
+        useCase(Day(Period.ONE.ordinal))
             .onLoading {
                 _articleListState.postValue(ArticleListViewState.Loading)
             }

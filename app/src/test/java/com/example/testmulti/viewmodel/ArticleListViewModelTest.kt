@@ -2,6 +2,7 @@ package com.example.testmulti.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.example.common.enum.Period
 import com.example.domain.model.ArticleModel
 import com.example.domain.model.Day
 import com.example.domain.model.Result
@@ -35,10 +36,6 @@ import java.io.IOException
 @RunWith(JUnit4::class)
 class ArticleListViewModelTest {
 
-    companion object {
-        const val ONE_DAY = 1
-    }
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -59,7 +56,7 @@ class ArticleListViewModelTest {
 
     @Test
     fun `fetch data and check success view state`() = runBlocking {
-        every { useCase(Day(ONE_DAY)) } returns flowOf(
+        every { useCase(Day(Period.ONE.ordinal)) } returns flowOf(
             Result.Success(
                 listOf(
                     ArticleModel(id = 1),
@@ -75,7 +72,7 @@ class ArticleListViewModelTest {
 
     @Test
     fun `fetch data with empty list and check data state`() = runBlocking {
-        every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Success(emptyList()))
+        every { useCase(Day(Period.ONE.ordinal)) } returns flowOf(Result.Success(emptyList()))
         articleViewModel.fetchArticles()
         val actualData = articleViewModel.articleListData.value
         val expectedData = emptyList<ArticleModel>()
@@ -85,7 +82,7 @@ class ArticleListViewModelTest {
 
     @Test
     fun `fetch data with empty list and check view state`() = runBlocking {
-        every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Success(emptyList()))
+        every { useCase(Day(Period.ONE.ordinal)) } returns flowOf(Result.Success(emptyList()))
         articleViewModel.fetchArticles()
 
         assertEquals(articleViewModel.articleListState.value, ArticleListViewState.Empty)
@@ -93,7 +90,7 @@ class ArticleListViewModelTest {
 
     @Test
     fun `throw exception while fetching data and check data state is null`() = runBlocking {
-        every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(Exception("Exception")))
+        every { useCase(Day(Period.ONE.ordinal)) } returns flowOf(Result.Error(Exception("Exception")))
         articleViewModel.fetchArticles()
         val actualData = articleViewModel.articleListData.value
         val expectedData = null
@@ -104,7 +101,7 @@ class ArticleListViewModelTest {
     @Test
     fun `throw exception while fetching data and check view state is error state`() =
         runBlocking {
-            every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(Exception("Exception")))
+            every { useCase(Day(Period.ONE.ordinal)) } returns flowOf(Result.Error(Exception("Exception")))
             articleViewModel.fetchArticles()
 
             assertEquals(articleViewModel.articleListState.value, ArticleListViewState.Error)
@@ -113,7 +110,7 @@ class ArticleListViewModelTest {
     @Test
     fun `throw exception while fetching data and check error string is not null`() =
         runBlocking {
-            every { useCase(Day(ONE_DAY)) } returns flowOf(Result.Error(IOException("IO Exception")))
+            every { useCase(Day(Period.ONE.ordinal)) } returns flowOf(Result.Error(IOException("IO Exception")))
             articleViewModel.fetchArticles()
 
             assert(articleViewModel.articleError.get().isNullOrEmpty().not())
@@ -122,7 +119,7 @@ class ArticleListViewModelTest {
     @Test
     fun `check test first emitted loading`() = runBlocking {
 
-        every { useCase(Day(ONE_DAY)) } returns merge(
+        every { useCase(Day(Period.ONE.ordinal)) } returns merge(
             flowOf(Result.Loading), flowOf(
                 Result.Success(
                     listOf(ArticleModel(id = 1), ArticleModel(id = 2))
@@ -144,7 +141,7 @@ class ArticleListViewModelTest {
     @Test
     fun `check if final state is loaded`() = runBlocking {
 
-        every { useCase(Day(ONE_DAY)) } returns merge(
+        every { useCase(Day(Period.ONE.ordinal)) } returns merge(
             flowOf(Result.Loading), flowOf(
                 Result.Success(
                     listOf(ArticleModel(id = 1), ArticleModel(id = 2))
