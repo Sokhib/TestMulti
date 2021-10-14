@@ -35,6 +35,17 @@
             </intent-filter>
 
         </activity>
+
+        <receiver
+            android:name=".articlelist.NewMediaReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_SCANNER_STARTED" />
+                <action android:name="android.intent.action.MEDIA_SCANNER_FINISHED" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
