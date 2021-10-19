@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class TestIntentActivity() : AppCompatActivity() {
+class TestIntentActivity : AppCompatActivity() {
     var one = 1
     val viewModel: TestIntentViewModel by viewModels()
 

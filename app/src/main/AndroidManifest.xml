@@ -16,9 +16,7 @@
         android:theme="@style/Theme.TestMulti">
         <activity
             android:name=".TestIntentActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:taskAffinity="">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
